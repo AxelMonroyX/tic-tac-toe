@@ -59,7 +59,7 @@ class Game_TicTacToe {
         winnerPositions.add("3,4,5");
         int counter;
         for (int i = 0; i < actualGame.length; i++) {
-            if (actualGame[i].equals(this.lastPlayer)) {
+            if (actualGame[i] == this.lastPlayer) {
                 counter = 0;
                 for (String position : winnerPositions) {
                     String[] positionINT = position.split(",");
