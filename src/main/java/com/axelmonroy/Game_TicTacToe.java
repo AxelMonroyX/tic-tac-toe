@@ -9,7 +9,7 @@ import java.util.Random;
  * https://github.com/AxelMonroyX
  */
 class Game_TicTacToe {
-    private String[] actualGame = new String[9];
+     String[] actualGame = new String[9];
     private String lastPlayer;
 
     void humanSelectPosition(int positionSelectedByHuman) {
@@ -22,15 +22,16 @@ class Game_TicTacToe {
         selectPosition(positionSelectedByCPU, "cpu");
     }
 
-    private void selectRandomPosition() {
+    int selectRandomPosition() {
         Random rnd = new Random();
         int positionSelectedByCPU = ((int) (rnd.nextDouble() * 9 + 1)) - 1;
-        System.out.println(positionSelectedByCPU);
+//        System.out.println(positionSelectedByCPU);
         if (actualGame[positionSelectedByCPU] == null) {
             cpuSelectPosition(positionSelectedByCPU);
         } else {
-            selectRandomPosition();
+            positionSelectedByCPU = selectRandomPosition();
         }
+        return positionSelectedByCPU;
 
     }
 
@@ -48,7 +49,7 @@ class Game_TicTacToe {
     }
 
     boolean someoneWins() {
-        if (fullBoard(actualGame)) return false;
+        if (fullBoard()) return false;
         List<String> winnerPositions = new LinkedList<String>();
         winnerPositions.add("0,1,2");
         winnerPositions.add("0,4,8");
@@ -57,28 +58,30 @@ class Game_TicTacToe {
         winnerPositions.add("2,4,6");
         winnerPositions.add("2,5,8");
         winnerPositions.add("3,4,5");
-        int counter;
-        for (int i = 0; i < actualGame.length; i++) {
-            if (actualGame[i] == this.lastPlayer) {
-                counter = 0;
-                for (String position : winnerPositions) {
+        int counter = 0;
+        for (String position : winnerPositions) {
+            for (int i = 0; i < this.actualGame.length; i++) {
+
+                if ((this.actualGame[i] != null) && (actualGame[i].equals(lastPlayer))) {
+
                     String[] positionINT = position.split(",");
                     if (i == Integer.parseInt(positionINT[0])) counter++;
                     if (i == Integer.parseInt(positionINT[1])) counter++;
                     if (i == Integer.parseInt(positionINT[2])) counter++;
 
                 }
-                if (counter == 4) {
-                    return true;
-                }
             }
+            if (counter == 3) return true;
+            counter = 0;
 
         }
 
         return false;
     }
 
-    private boolean fullBoard(String[] actualGame) {
+
+
+    public boolean fullBoard() {
         int counterWithContenent = 0;
         for (String anActualGame : actualGame) {
 
@@ -86,5 +89,4 @@ class Game_TicTacToe {
         }
         return counterWithContenent == actualGame.length;
     }
-
 }

@@ -3,6 +3,7 @@ package com.axelmonroy;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 
 /**
  * Created by axelmonroyx on 19/09/16.
@@ -14,11 +15,11 @@ public class Game_TicTacToe_Test {
     public void testGameHumanWins() {
 
         Game_TicTacToe mynewgame = new Game_TicTacToe();
-        mynewgame.humanSelectPosition(4);
-        mynewgame.cpuSelectPosition(8);
-        mynewgame.humanSelectPosition(5);
-        mynewgame.cpuSelectPosition(1);
         mynewgame.humanSelectPosition(3);
+        mynewgame.cpuSelectPosition(7);
+        mynewgame.humanSelectPosition(4);
+        mynewgame.cpuSelectPosition(0);
+        mynewgame.humanSelectPosition(5);
         assertEquals(true, mynewgame.someoneWins());
         assertEquals("HUMAN wins!", mynewgame.checkWhoWins());
 
@@ -52,8 +53,17 @@ public class Game_TicTacToe_Test {
         mynewgame.humanSelectPosition(3);
         mynewgame.cpuSelectPosition(6);
         mynewgame.humanSelectPosition(8);
-        assertEquals(false, mynewgame.someoneWins());
+//        assertEquals(false, mynewgame.someoneWins());
+        assertFalse(mynewgame.someoneWins());
         assertEquals("no one wins :( ", mynewgame.checkWhoWins());
+
+    }
+
+    @Test
+    public void noOneWins() {
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+        mynewgame.humanSelectPosition(4);
+        assertFalse(mynewgame.someoneWins());
 
     }
 
