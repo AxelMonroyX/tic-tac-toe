@@ -9,7 +9,7 @@ import java.util.Random;
  * https://github.com/AxelMonroyX
  */
 class Game_TicTacToe {
-     String[] actualGame = new String[9];
+    String[] actualGame = new String[9];
     private String lastPlayer;
 
     void humanSelectPosition(int positionSelectedByHuman) {
@@ -49,7 +49,7 @@ class Game_TicTacToe {
     }
 
     boolean someoneWins() {
-        if (fullBoard()) return false;
+       
         List<String> winnerPositions = new LinkedList<String>();
         winnerPositions.add("0,1,2");
         winnerPositions.add("0,4,8");
@@ -80,11 +80,9 @@ class Game_TicTacToe {
     }
 
 
-
     public boolean fullBoard() {
         int counterWithContenent = 0;
         for (String anActualGame : actualGame) {
-
             if (anActualGame != null) counterWithContenent++;
         }
         return counterWithContenent == actualGame.length;

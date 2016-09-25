@@ -123,15 +123,17 @@ public class Client_Tic_Tac_Toe {
                         break;
                 }
             }
-            if (myNewGame.fullBoard()) {
-                JOptionPane.showMessageDialog(null, myNewGame.checkWhoWins());
-                flushGame();
-            }
+
 
             if (myNewGame.someoneWins()) {
                 JOptionPane.showMessageDialog(null, myNewGame.checkWhoWins());
                 flushGame();
             }
+            if(myNewGame.fullBoard() && !myNewGame.someoneWins()){
+                JOptionPane.showMessageDialog(null, myNewGame.checkWhoWins());
+                flushGame();
+            }
+
         }
 
 
