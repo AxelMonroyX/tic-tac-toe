@@ -63,7 +63,7 @@ class Game_TicTacToe {
     }
 
     boolean someoneWins() {
-       
+
 
         int counter = 0;
         for (String position : this.winnerPositions) {
@@ -96,6 +96,13 @@ class Game_TicTacToe {
     }
 
     public int selectSmartPosition() {
-        return 0;
+        int middleOfGame = 4;
+        if (actualGame[middleOfGame] == null) {
+            cpuSelectPosition(middleOfGame);
+        } else {
+            middleOfGame = selectRandomPosition();
+        }
+        return middleOfGame;
+
     }
 }

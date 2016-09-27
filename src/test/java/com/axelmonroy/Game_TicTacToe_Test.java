@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by axelmonroyx on 19/09/16.
@@ -34,7 +35,7 @@ public class Game_TicTacToe_Test {
         mynewgame.humanSelectPosition(1);
         mynewgame.cpuSelectPosition(2);
         mynewgame.humanSelectPosition(7);
-        assertEquals(true, mynewgame.someoneWins());
+        assertTrue(mynewgame.someoneWins());
         assertEquals("HUMAN wins!", mynewgame.checkWhoWins());
 
     }
@@ -53,7 +54,6 @@ public class Game_TicTacToe_Test {
         mynewgame.humanSelectPosition(3);
         mynewgame.cpuSelectPosition(6);
         mynewgame.humanSelectPosition(8);
-//        assertEquals(false, mynewgame.someoneWins());
         assertFalse(mynewgame.someoneWins());
         assertEquals("no one wins :( ", mynewgame.checkWhoWins());
 
@@ -64,6 +64,15 @@ public class Game_TicTacToe_Test {
         Game_TicTacToe mynewgame = new Game_TicTacToe();
         mynewgame.humanSelectPosition(4);
         assertFalse(mynewgame.someoneWins());
+
+    }
+
+    @Test
+    public void cpuSelectInTheMiddleIfCan(){
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+        mynewgame.humanSelectPosition(1);
+        mynewgame.selectSmartPosition();
+        assertEquals("cpu", mynewgame.actualGame[4]);
 
     }
 
