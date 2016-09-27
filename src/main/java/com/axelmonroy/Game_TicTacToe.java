@@ -23,6 +23,8 @@ class Game_TicTacToe {
         winnerPositions.add("2,4,6");
         winnerPositions.add("2,5,8");
         winnerPositions.add("3,4,5");
+        winnerPositions.add("6,7,8");
+
 
     }
 
