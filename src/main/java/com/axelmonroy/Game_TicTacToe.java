@@ -10,7 +10,21 @@ import java.util.Random;
  */
 class Game_TicTacToe {
     String[] actualGame = new String[9];
+    List<String> winnerPositions = new LinkedList<String>();
+
+
     private String lastPlayer;
+
+    public Game_TicTacToe() {
+        winnerPositions.add("0,1,2");
+        winnerPositions.add("0,4,8");
+        winnerPositions.add("0,3,6");
+        winnerPositions.add("1,4,7");
+        winnerPositions.add("2,4,6");
+        winnerPositions.add("2,5,8");
+        winnerPositions.add("3,4,5");
+
+    }
 
     void humanSelectPosition(int positionSelectedByHuman) {
 
@@ -50,19 +64,12 @@ class Game_TicTacToe {
 
     boolean someoneWins() {
        
-        List<String> winnerPositions = new LinkedList<String>();
-        winnerPositions.add("0,1,2");
-        winnerPositions.add("0,4,8");
-        winnerPositions.add("0,3,6");
-        winnerPositions.add("1,4,7");
-        winnerPositions.add("2,4,6");
-        winnerPositions.add("2,5,8");
-        winnerPositions.add("3,4,5");
+
         int counter = 0;
-        for (String position : winnerPositions) {
+        for (String position : this.winnerPositions) {
             for (int i = 0; i < this.actualGame.length; i++) {
 
-                if ((this.actualGame[i] != null) && (actualGame[i].equals(lastPlayer))) {
+                if ((this.actualGame[i] != null) && (this.actualGame[i].equals(this.lastPlayer))) {
 
                     String[] positionINT = position.split(",");
                     if (i == Integer.parseInt(positionINT[0])) counter++;
@@ -82,9 +89,13 @@ class Game_TicTacToe {
 
     public boolean fullBoard() {
         int counterWithContenent = 0;
-        for (String anActualGame : actualGame) {
+        for (String anActualGame : this.actualGame) {
             if (anActualGame != null) counterWithContenent++;
         }
-        return counterWithContenent == actualGame.length;
+        return counterWithContenent == this.actualGame.length;
+    }
+
+    public int selectSmartPosition() {
+        return 0;
     }
 }

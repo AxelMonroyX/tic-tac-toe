@@ -90,7 +90,7 @@ public class Client_Tic_Tac_Toe {
                 JOptionPane.showMessageDialog(null, myNewGame.checkWhoWins());
                 flushGame();
             } else if (!myNewGame.someoneWins() & !myNewGame.fullBoard()) {
-                int positionSelectedByCPU = myNewGame.selectRandomPosition();
+                int positionSelectedByCPU = myNewGame.selectSmartPosition();
                 switch (positionSelectedByCPU) {
                     case 0:
                         buttonSelectedByCPU(position0);
