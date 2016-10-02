@@ -66,6 +66,17 @@ public class Game_TicTacToe_Test {
     }
 
     @Test
+    public void canWinPlayer() {
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+        mynewgame.humanSelectPosition(0);
+        assertFalse(mynewgame.canWin("cpu"));
+
+
+        mynewgame.humanSelectPosition(2);
+        assertTrue(mynewgame.canWin("human"));
+    }
+
+    @Test
     public void cpuSelectInTheMiddleIfCan() {
         Game_TicTacToe mynewgame = new Game_TicTacToe();
         mynewgame.humanSelectPosition(1);
@@ -81,7 +92,8 @@ public class Game_TicTacToe_Test {
 
         mynewgame.cpuSelectPosition(0);
         mynewgame.cpuSelectPosition(2);
-        assertEquals(mynewgame.selectSmartPosition(), 1);
+        assertTrue(mynewgame.canWin("cpu"));
+        assertEquals(1, mynewgame.selectSmartPosition());
 
         mynewgame = new Game_TicTacToe();
         mynewgame.cpuSelectPosition(0);
@@ -92,17 +104,30 @@ public class Game_TicTacToe_Test {
         mynewgame = new Game_TicTacToe();
         mynewgame.humanSelectPosition(0);
         mynewgame.humanSelectPosition(2);
+        assertTrue(mynewgame.canWin("human"));
         assertEquals(mynewgame.selectSmartPosition(), 1);
 
 
         mynewgame = new Game_TicTacToe();
         mynewgame.humanSelectPosition(1);
+        assertFalse(mynewgame.canWin("human"));
         assertEquals(4, mynewgame.selectSmartPosition());
         mynewgame.humanSelectPosition(2);
-        assertEquals(3, mynewgame.selectSmartPosition());
+        assertEquals(1, mynewgame.selectSmartPosition());
 
 
     }
 
+    @Test
+    public void randomGame(){
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+        mynewgame.humanSelectPosition(8);
+        assertEquals(4, mynewgame.selectSmartPosition());
+        mynewgame.humanSelectPosition(2);
+        assertEquals(5, mynewgame.selectSmartPosition());
+        mynewgame.humanSelectPosition(0);
+
+
+    }
 
 }

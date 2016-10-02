@@ -1,7 +1,6 @@
 package com.axelmonroy;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -10,20 +9,21 @@ import java.util.Random;
  */
 class Game_TicTacToe {
     String[] actualGame = new String[9];
-    List<String> winnerPositions = new LinkedList<String>();
+
+    ArrayList<int[]> winnerPositions = new ArrayList<int[]>();
 
 
     private String lastPlayer;
 
     public Game_TicTacToe() {
-        winnerPositions.add("0,1,2");
-        winnerPositions.add("0,4,8");
-        winnerPositions.add("0,3,6");
-        winnerPositions.add("1,4,7");
-        winnerPositions.add("2,4,6");
-        winnerPositions.add("2,5,8");
-        winnerPositions.add("3,4,5");
-        winnerPositions.add("6,7,8");
+        winnerPositions.add(new int[]{0, 1, 2});
+        winnerPositions.add(new int[]{0, 4, 8});
+        winnerPositions.add(new int[]{0, 3, 6});
+        winnerPositions.add(new int[]{1, 4, 7});
+        winnerPositions.add(new int[]{2, 4, 6});
+        winnerPositions.add(new int[]{2, 5, 8});
+        winnerPositions.add(new int[]{3, 4, 5});
+        winnerPositions.add(new int[]{6, 7, 8});
 
 
     }
@@ -67,15 +67,14 @@ class Game_TicTacToe {
 
 
         int counter = 0;
-        for (String position : this.winnerPositions) {
+        for (int[] position : this.winnerPositions) {
             for (int i = 0; i < this.actualGame.length; i++) {
 
                 if ((this.actualGame[i] != null) && (this.actualGame[i].equals(this.lastPlayer))) {
 
-                    String[] positionINT = position.split(",");
-                    if (i == Integer.parseInt(positionINT[0])) counter++;
-                    if (i == Integer.parseInt(positionINT[1])) counter++;
-                    if (i == Integer.parseInt(positionINT[2])) counter++;
+                    if (i == position[0]) counter++;
+                    if (i == position[1]) counter++;
+                    if (i == position[2]) counter++;
 
                 }
             }
@@ -102,78 +101,86 @@ class Game_TicTacToe {
         if (canWin("cpu")) {
             positionSelectedCpu = positionToWin("cpu");
 
-        } else if (canWin("human")) {
-            positionSelectedCpu = positionToWin("human");
+        } else {
+            if (canWin("human")) {
+                positionSelectedCpu = positionToWin("human");
 
 
-        } else if (actualGame[middleOfGame] == null) {
-            positionSelectedCpu = middleOfGame;
+            } else {
+                if (actualGame[middleOfGame] == null) {
+                    positionSelectedCpu = middleOfGame;
+                } else {
+                    positionSelectedCpu = selectRandomPosition();
+                }
+            }
+        }
+
+        if (actualGame[positionSelectedCpu] == null) {
+            cpuSelectPosition(positionSelectedCpu);
         } else {
             positionSelectedCpu = selectRandomPosition();
         }
 
-        if (actualGame[positionSelectedCpu] == null) cpuSelectPosition(positionSelectedCpu);
-
 
         return positionSelectedCpu;
+
 
     }
 
     private int positionToWin(String player) {
+
         int positionSelectedToWin = 0;
         int counter = 0;
-        for (String position : this.winnerPositions) {
+        for (int[] position : this.winnerPositions) {
             for (int i = 0; i < this.actualGame.length; i++) {
-
-                if ((this.actualGame[i] != null) & (this.actualGame[i].equals(player))) {
-
-                    String[] positionINT = position.split(",");
-
-                    if (i == Integer.parseInt(positionINT[0])) {
+                if ((this.actualGame[i] != null) && (this.actualGame[i].equals(player))) {
+                    if (i == position[0]) {
                         counter++;
                     } else {
-                        positionSelectedToWin = Integer.parseInt(positionINT[1]);
+                        positionSelectedToWin = position[0];
                     }
-                    if (i == Integer.parseInt(positionINT[1])) {
+
+                    if (i == position[1]) {
                         counter++;
                     } else {
-                        positionSelectedToWin = Integer.parseInt(positionINT[1]);
+                        positionSelectedToWin = position[1];
                     }
-                    if (i == Integer.parseInt(positionINT[2])) {
+
+                    if (i == position[2]) {
                         counter++;
                     } else {
-                        positionSelectedToWin = Integer.parseInt(positionINT[2]);
+                        positionSelectedToWin = position[2];
                     }
+                    if (counter == 2) return positionSelectedToWin;
 
                 }
+
+
             }
-            if (counter == 2) return positionSelectedToWin;
+
             counter = 0;
 
         }
 
-        return 0;
+
+        return positionSelectedToWin;
     }
 
-    private boolean canWin(String player) {
+    public boolean canWin(String player) {
 
         int counter = 0;
-        for (String position : this.winnerPositions) {
+        for (int[] position : this.winnerPositions) {
             for (int i = 0; i < this.actualGame.length; i++) {
-
                 if ((this.actualGame[i] != null) && (this.actualGame[i].equals(player))) {
-
-                    String[] positionINT = position.split(",");
-                    if (i == Integer.parseInt(positionINT[0])) counter++;
-                    if (i == Integer.parseInt(positionINT[1])) counter++;
-                    if (i == Integer.parseInt(positionINT[2])) counter++;
-
+                    if (i == position[0]) counter++;
+                    if (i == position[1]) counter++;
+                    if (i == position[2]) counter++;
+                    if (counter == 2) return true;
                 }
             }
-            if (counter == 2) return true;
             counter = 0;
-
         }
+
 
         return false;
     }
