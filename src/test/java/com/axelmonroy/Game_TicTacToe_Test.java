@@ -2,9 +2,7 @@ package com.axelmonroy;
 
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 
 /**
  * Created by axelmonroyx on 19/09/16.
@@ -68,7 +66,7 @@ public class Game_TicTacToe_Test {
     }
 
     @Test
-    public void cpuSelectInTheMiddleIfCan(){
+    public void cpuSelectInTheMiddleIfCan() {
         Game_TicTacToe mynewgame = new Game_TicTacToe();
         mynewgame.humanSelectPosition(1);
         mynewgame.selectSmartPosition();
@@ -77,6 +75,34 @@ public class Game_TicTacToe_Test {
     }
 
 
+    @Test
+    public void cpuSelectWinnerPosition() {
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+
+        mynewgame.cpuSelectPosition(0);
+        mynewgame.cpuSelectPosition(2);
+        assertEquals(mynewgame.selectSmartPosition(), 1);
+
+        mynewgame = new Game_TicTacToe();
+        mynewgame.cpuSelectPosition(0);
+        mynewgame.cpuSelectPosition(1);
+        assertEquals(mynewgame.selectSmartPosition(), 2);
+
+
+        mynewgame = new Game_TicTacToe();
+        mynewgame.humanSelectPosition(0);
+        mynewgame.humanSelectPosition(2);
+        assertEquals(mynewgame.selectSmartPosition(), 1);
+
+
+        mynewgame = new Game_TicTacToe();
+        mynewgame.humanSelectPosition(1);
+        assertEquals(4, mynewgame.selectSmartPosition());
+        mynewgame.humanSelectPosition(2);
+        assertEquals(3, mynewgame.selectSmartPosition());
+
+
+    }
 
 
 }
