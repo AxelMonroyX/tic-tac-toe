@@ -98,7 +98,7 @@ public class Game_TicTacToe_Test {
         mynewgame = new Game_TicTacToe();
         mynewgame.cpuSelectPosition(0);
         mynewgame.cpuSelectPosition(1);
-        assertEquals(mynewgame.selectSmartPosition(), 2);
+        assertEquals(2, mynewgame.selectSmartPosition());
 
 
         mynewgame = new Game_TicTacToe();
@@ -113,13 +113,16 @@ public class Game_TicTacToe_Test {
         assertFalse(mynewgame.canWin("human"));
         assertEquals(4, mynewgame.selectSmartPosition());
         mynewgame.humanSelectPosition(2);
-        assertEquals(1, mynewgame.selectSmartPosition());
+
+        assertTrue(mynewgame.canWin("human"));
+
+        assertEquals(0, mynewgame.selectSmartPosition());
 
 
     }
 
     @Test
-    public void randomGame(){
+    public void randomGame() {
         Game_TicTacToe mynewgame = new Game_TicTacToe();
         mynewgame.humanSelectPosition(8);
         assertEquals(4, mynewgame.selectSmartPosition());

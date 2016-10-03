@@ -104,8 +104,6 @@ class Game_TicTacToe {
         } else {
             if (canWin("human")) {
                 positionSelectedCpu = positionToWin("human");
-
-
             } else {
                 if (actualGame[middleOfGame] == null) {
                     positionSelectedCpu = middleOfGame;
@@ -129,41 +127,28 @@ class Game_TicTacToe {
 
     private int positionToWin(String player) {
 
-        int positionSelectedToWin = 0;
         int counter = 0;
+        int positionToWin = -1;
         for (int[] position : this.winnerPositions) {
             for (int i = 0; i < this.actualGame.length; i++) {
-                if ((this.actualGame[i] != null) && (this.actualGame[i].equals(player))) {
-                    if (i == position[0]) {
-                        counter++;
-                    } else {
-                        positionSelectedToWin = position[0];
-                    }
 
-                    if (i == position[1]) {
-                        counter++;
-                    } else {
-                        positionSelectedToWin = position[1];
-                    }
+                if (i == position[0] | i == position[1] | i == position[2]) {
+                    if (positionToWin != -1 && counter == 2) return positionToWin;
 
-                    if (i == position[2]) {
+                    if (actualGame[i] == null) {
+                        positionToWin = i;
+                    } else if (actualGame[i].equals(player)) {
                         counter++;
-                    } else {
-                        positionSelectedToWin = position[2];
                     }
-                    if (counter == 2) return positionSelectedToWin;
+                    if (positionToWin != -1 && counter == 2) return positionToWin;
+
 
                 }
-
-
             }
-
+            positionToWin = -1;
             counter = 0;
-
         }
-
-
-        return positionSelectedToWin;
+        return 0;
     }
 
     public boolean canWin(String player) {

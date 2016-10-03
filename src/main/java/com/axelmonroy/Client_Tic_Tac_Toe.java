@@ -91,7 +91,6 @@ public class Client_Tic_Tac_Toe {
                 flushGame();
             } else if (!myNewGame.someoneWins() & !myNewGame.fullBoard()) {
                 int positionSelectedByCPU = myNewGame.selectSmartPosition();
-                System.out.println(positionSelectedByCPU);
                 switch (positionSelectedByCPU) {
                     case 0:
                         buttonSelectedByCPU(position0);
