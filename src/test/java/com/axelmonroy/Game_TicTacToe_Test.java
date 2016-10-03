@@ -133,4 +133,46 @@ public class Game_TicTacToe_Test {
 
     }
 
+    @Test
+    public void notwin() {
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+        mynewgame.cpuSelectPosition(3);
+        mynewgame.cpuSelectPosition(4);
+        mynewgame.cpuSelectPosition(7);
+        assertFalse(mynewgame.someoneWins());
+    }
+
+    @Test
+    public void blockHuman() {
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+        mynewgame.humanSelectPosition(0);
+        assertEquals(4, mynewgame.selectSmartPosition());
+        mynewgame.humanSelectPosition(1);
+        assertEquals(2, mynewgame.selectSmartPosition());
+        mynewgame.humanSelectPosition(6);
+        assertTrue(mynewgame.canWin("human"));
+        assertEquals(3,mynewgame.selectSmartPosition());
+    }
+    @Test
+    public void blockHumanSmart() {
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+
+        mynewgame.humanSelectPosition(4);
+        mynewgame.humanSelectPosition(0);
+        mynewgame.humanSelectPosition(1);
+
+        mynewgame.cpuSelectPosition(5);
+
+        mynewgame.cpuSelectPosition(6);
+        mynewgame.cpuSelectPosition(8);
+
+        assertTrue(mynewgame.canWin("cpu"));
+        assertTrue(mynewgame.canWin("human"));
+        assertFalse(mynewgame.someoneWins());
+
+//        assertEquals();
+
+
+    }
+
 }

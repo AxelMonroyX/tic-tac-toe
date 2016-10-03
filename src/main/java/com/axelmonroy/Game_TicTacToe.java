@@ -41,10 +41,9 @@ class Game_TicTacToe {
     int selectRandomPosition() {
         Random rnd = new Random();
         int positionSelectedByCPU = ((int) (rnd.nextDouble() * 9 + 1)) - 1;
-        if (actualGame[positionSelectedByCPU] == null) {
-            cpuSelectPosition(positionSelectedByCPU);
-        } else {
-            positionSelectedByCPU = selectRandomPosition();
+
+        for (int i = 0; i <= 8; i++) {
+            if (actualGame[i] == null) return i;
         }
         return positionSelectedByCPU;
 
@@ -152,21 +151,27 @@ class Game_TicTacToe {
     }
 
     public boolean canWin(String player) {
-
         int counter = 0;
+        int positionToWin = -1;
         for (int[] position : this.winnerPositions) {
             for (int i = 0; i < this.actualGame.length; i++) {
-                if ((this.actualGame[i] != null) && (this.actualGame[i].equals(player))) {
-                    if (i == position[0]) counter++;
-                    if (i == position[1]) counter++;
-                    if (i == position[2]) counter++;
-                    if (counter == 2) return true;
+
+                if (i == position[0] | i == position[1] | i == position[2]) {
+                    if (positionToWin != -1 && counter == 2) return true;
+
+                    if (actualGame[i] == null) {
+                        positionToWin = i;
+                    } else if (actualGame[i].equals(player)) {
+                        counter++;
+                    }
+                    if (positionToWin != -1 && counter == 2) return true;
+
+
                 }
             }
+            positionToWin = -1;
             counter = 0;
         }
-
-
         return false;
     }
 
