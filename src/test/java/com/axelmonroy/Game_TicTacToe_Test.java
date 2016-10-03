@@ -2,8 +2,7 @@ package com.axelmonroy;
 
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.*;
 
 /**
  * Created by axelmonroyx on 19/09/16.
@@ -34,7 +33,7 @@ public class Game_TicTacToe_Test {
         mynewgame.humanSelectPosition(1);
         mynewgame.cpuSelectPosition(2);
         mynewgame.humanSelectPosition(7);
-        assertEquals(true, mynewgame.someoneWins());
+        assertTrue(mynewgame.someoneWins());
         assertEquals("HUMAN wins!", mynewgame.checkWhoWins());
 
     }
@@ -53,7 +52,6 @@ public class Game_TicTacToe_Test {
         mynewgame.humanSelectPosition(3);
         mynewgame.cpuSelectPosition(6);
         mynewgame.humanSelectPosition(8);
-//        assertEquals(false, mynewgame.someoneWins());
         assertFalse(mynewgame.someoneWins());
         assertEquals("no one wins :( ", mynewgame.checkWhoWins());
 
@@ -67,7 +65,114 @@ public class Game_TicTacToe_Test {
 
     }
 
+    @Test
+    public void canWinPlayer() {
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+        mynewgame.humanSelectPosition(0);
+        assertFalse(mynewgame.canWin("cpu"));
 
 
+        mynewgame.humanSelectPosition(2);
+        assertTrue(mynewgame.canWin("human"));
+    }
+
+    @Test
+    public void cpuSelectInTheMiddleIfCan() {
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+        mynewgame.humanSelectPosition(1);
+        mynewgame.selectSmartPosition();
+        assertEquals("cpu", mynewgame.actualGame[4]);
+
+    }
+
+
+    @Test
+    public void cpuSelectWinnerPosition() {
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+
+        mynewgame.cpuSelectPosition(0);
+        mynewgame.cpuSelectPosition(2);
+        assertTrue(mynewgame.canWin("cpu"));
+        assertEquals(1, mynewgame.selectSmartPosition());
+
+        mynewgame = new Game_TicTacToe();
+        mynewgame.cpuSelectPosition(0);
+        mynewgame.cpuSelectPosition(1);
+        assertEquals(2, mynewgame.selectSmartPosition());
+
+
+        mynewgame = new Game_TicTacToe();
+        mynewgame.humanSelectPosition(0);
+        mynewgame.humanSelectPosition(2);
+        assertTrue(mynewgame.canWin("human"));
+        assertEquals(mynewgame.selectSmartPosition(), 1);
+
+
+        mynewgame = new Game_TicTacToe();
+        mynewgame.humanSelectPosition(1);
+        assertFalse(mynewgame.canWin("human"));
+        assertEquals(4, mynewgame.selectSmartPosition());
+        mynewgame.humanSelectPosition(2);
+
+        assertTrue(mynewgame.canWin("human"));
+
+        assertEquals(0, mynewgame.selectSmartPosition());
+
+
+    }
+
+    @Test
+    public void randomGame() {
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+        mynewgame.humanSelectPosition(8);
+        assertEquals(4, mynewgame.selectSmartPosition());
+        mynewgame.humanSelectPosition(2);
+        assertEquals(5, mynewgame.selectSmartPosition());
+        mynewgame.humanSelectPosition(0);
+
+
+    }
+
+    @Test
+    public void notwin() {
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+        mynewgame.cpuSelectPosition(3);
+        mynewgame.cpuSelectPosition(4);
+        mynewgame.cpuSelectPosition(7);
+        assertFalse(mynewgame.someoneWins());
+    }
+
+    @Test
+    public void blockHuman() {
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+        mynewgame.humanSelectPosition(0);
+        assertEquals(4, mynewgame.selectSmartPosition());
+        mynewgame.humanSelectPosition(1);
+        assertEquals(2, mynewgame.selectSmartPosition());
+        mynewgame.humanSelectPosition(6);
+        assertTrue(mynewgame.canWin("human"));
+        assertEquals(3,mynewgame.selectSmartPosition());
+    }
+    @Test
+    public void blockHumanSmart() {
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+
+        mynewgame.humanSelectPosition(4);
+        mynewgame.humanSelectPosition(0);
+        mynewgame.humanSelectPosition(1);
+
+        mynewgame.cpuSelectPosition(5);
+
+        mynewgame.cpuSelectPosition(6);
+        mynewgame.cpuSelectPosition(8);
+
+        assertTrue(mynewgame.canWin("cpu"));
+        assertTrue(mynewgame.canWin("human"));
+        assertFalse(mynewgame.someoneWins());
+
+//        assertEquals();
+
+
+    }
 
 }
