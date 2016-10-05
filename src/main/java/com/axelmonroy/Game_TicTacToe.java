@@ -1,7 +1,6 @@
 package com.axelmonroy;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by axelmonroyx on 19/09/16.
@@ -39,12 +38,23 @@ class Game_TicTacToe {
     }
 
     int selectRandomPosition() {
-        Random rnd = new Random();
-        int positionSelectedByCPU = ((int) (rnd.nextDouble() * 9 + 1)) - 1;
+        int positionSelectedByCPU = 0;
+
+
+        if (this.actualGame[0] == "human" | this.actualGame[2] == "human" | this.actualGame[6] == "human" | this.actualGame[8] == "human") {
+            if (this.actualGame[0] == "human" && this.actualGame[8] == null) return 8;
+            if (this.actualGame[8] == "human" && this.actualGame[0] == null) return 0;
+            if (this.actualGame[2] == "human" && this.actualGame[6] == null) return 6;
+            if (this.actualGame[6] == "human" && this.actualGame[2] == null) return 2;
+
+
+        }
 
         for (int i = 0; i <= 8; i++) {
             if (actualGame[i] == null) return i;
         }
+
+
         return positionSelectedByCPU;
 
     }
