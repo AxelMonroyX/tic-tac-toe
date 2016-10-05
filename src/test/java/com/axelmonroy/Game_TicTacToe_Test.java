@@ -151,8 +151,9 @@ public class Game_TicTacToe_Test {
         assertEquals(2, mynewgame.selectSmartPosition());
         mynewgame.humanSelectPosition(6);
         assertTrue(mynewgame.canWin("human"));
-        assertEquals(3,mynewgame.selectSmartPosition());
+        assertEquals(3, mynewgame.selectSmartPosition());
     }
+
     @Test
     public void blockHumanSmart() {
         Game_TicTacToe mynewgame = new Game_TicTacToe();
@@ -170,9 +171,24 @@ public class Game_TicTacToe_Test {
         assertTrue(mynewgame.canWin("human"));
         assertFalse(mynewgame.someoneWins());
 
-//        assertEquals();
+    }
 
+    @Test
+    public void crossPlay() {
+        Game_TicTacToe mynewgame = new Game_TicTacToe();
+        mynewgame.humanSelectPosition(7);
+        assertEquals(4, mynewgame.selectSmartPosition());
+        mynewgame.humanSelectPosition(2);
+        assertEquals(6, mynewgame.selectSmartPosition());
+
+
+        mynewgame = new Game_TicTacToe();
+        mynewgame.humanSelectPosition(1);
+        assertEquals(4, mynewgame.selectSmartPosition());
+        mynewgame.humanSelectPosition(6);
+        assertEquals(2, mynewgame.selectSmartPosition());
 
     }
+
 
 }
