@@ -160,7 +160,7 @@ public class Client_Tic_Tac_Toe {
     }
 
     private void flushButton(JButton buttonToFlush) {
-        buttonToFlush.setText("");
+        buttonToFlush.setText(" ");
         buttonToFlush.setEnabled(true);
         buttonToFlush.setBackground(new Color(187, 187, 187));
     }
