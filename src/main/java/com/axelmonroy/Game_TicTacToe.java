@@ -37,7 +37,7 @@ class Game_TicTacToe {
         selectPosition(positionSelectedByCPU, "cpu");
     }
 
-    int selectRandomPosition() {
+    int selectPositionByCorners() {
         int positionSelectedByCPU = 0;
 
 
@@ -49,6 +49,20 @@ class Game_TicTacToe {
 
 
         }
+        if (this.actualGame[0] == "human" && this.actualGame[8] == "human") return 1;
+        if (this.actualGame[8] == "human" && this.actualGame[0] == "human") return 1;
+        if (this.actualGame[2] == "human" && this.actualGame[6] == "human") return 1;
+        if (this.actualGame[6] == "human" && this.actualGame[2] == "human") return 1;
+
+
+        if ( this.actualGame[0] == null) return 0;
+        if ( this.actualGame[2] == null) return 2;
+        if ( this.actualGame[6] == null) return 6;
+        if ( this.actualGame[8] == null) return 8;
+
+
+
+
 
         for (int i = 0; i <= 8; i++) {
             if (actualGame[i] == null) return i;
@@ -114,10 +128,11 @@ class Game_TicTacToe {
             if (canWin("human")) {
                 positionSelectedCpu = positionToWin("human");
             } else {
+
                 if (actualGame[middleOfGame] == null) {
                     positionSelectedCpu = middleOfGame;
                 } else {
-                    positionSelectedCpu = selectRandomPosition();
+                    positionSelectedCpu = selectPositionByCorners();
                 }
             }
         }
@@ -125,7 +140,7 @@ class Game_TicTacToe {
         if (actualGame[positionSelectedCpu] == null) {
             cpuSelectPosition(positionSelectedCpu);
         } else {
-            positionSelectedCpu = selectRandomPosition();
+            positionSelectedCpu = selectPositionByCorners();
         }
 
 
